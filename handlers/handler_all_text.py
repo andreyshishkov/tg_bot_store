@@ -36,7 +36,7 @@ class HandlerAllText(Handler):
         @self.bot.message_handler()
         def handle(message):
 
-            if message.text  == config.KEYBOARD.get('INFO'):
+            if message.text == config.KEYBOARD.get('INFO'):
                 self.pressed_btn_info(message)
 
             if message.text == config.KEYBOARD.get('SETTINGS'):
