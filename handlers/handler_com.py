@@ -8,8 +8,7 @@ class HandlerCommands(Handler):
 
     def pressed_btn_start(self, message):
         self.bot.send_message(message.chat.id,
-                              f'{message.from_user.first_name}',
-                              'Привет! Жду дальнейших задач',
+                              f'{message.from_user.first_name}.Привет! Жду дальнейших задач',
                               reply_markup=self.keyboards.start_menu()
                               )
 
@@ -17,5 +16,5 @@ class HandlerCommands(Handler):
 
         @self.bot.message_handler(commands=['start'])
         def handle(message):
-            if message == '/start':
+            if message.text == '/start':
                 self.pressed_btn_start(message)
