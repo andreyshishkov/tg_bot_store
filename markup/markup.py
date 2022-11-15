@@ -54,9 +54,9 @@ class Keyboards:
 
     def category_menu(self):
         self.markup = ReplyKeyboardMarkup(True, True, row_width=1)
-        self.markup.add(self.set_btn('SEMI PRODUCT'))
+        self.markup.add(self.set_btn('SEMI_PRODUCT'))
         self.markup.add(self.set_btn('GROCERY'))
-        self.markup.add(self.set_btn('ICE CREAM'))
+        self.markup.add(self.set_btn('ICE_CREAM'))
         self.markup.row(self.set_btn('<<'), self.set_btn('ORDER'))
         return self.markup
 
@@ -64,7 +64,7 @@ class Keyboards:
     def set_inline_btn(name):
         return InlineKeyboardButton(
             str(name),
-            callback_data=str(name)
+            callback_data=str(name.id)
         )
 
     def set_select_category(self, category):

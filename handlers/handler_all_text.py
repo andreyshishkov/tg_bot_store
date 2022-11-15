@@ -20,7 +20,7 @@ class HandlerAllText(Handler):
         self.bot.send_message(
             message.chat.id,
             'Каталог категорий товаров',
-            reply_markup=self.keyboards.remove_menu(),
+            reply_markup=self.keyboards.remove_menu()
         )
         self.bot.send_message(
             message.chat.id,
@@ -46,7 +46,7 @@ class HandlerAllText(Handler):
     def pressed_btn_product(self, message, product):
         self.bot.send_message(
             message.chat.id,
-            'Категория' + config.KEYBOARD.get(product),
+            f'Категория{config.KEYBOARD.get(product)}',
             reply_markup=self.keyboards.set_select_category(config.CATEGORY.get(product))
         )
         self.bot.send_message(
@@ -74,11 +74,11 @@ class HandlerAllText(Handler):
                 self.pressed_btn_back(message)
 
             # Меню товаров
-            if message.text == config.KEYBOARD.get('SEMI PRODUCT'):
-                self.pressed_btn_product(message, 'SEMI PRODUCT')
+            if message.text == config.KEYBOARD.get('SEMI_PRODUCT'):
+                self.pressed_btn_product(message, 'SEMI_PRODUCT')
 
             if message.text == config.KEYBOARD.get('GROCERY'):
                 self.pressed_btn_product(message, 'GROCERY')
 
-            if message.text == config.KEYBOARD.get('ICE CREAM'):
-                self.pressed_btn_product(message, 'ICE CREAM')
+            if message.text == config.KEYBOARD.get('ICE_CREAM'):
+                self.pressed_btn_product(message, 'ICE_CREAM')
