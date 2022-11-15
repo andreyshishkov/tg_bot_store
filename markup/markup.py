@@ -26,7 +26,7 @@ class Keyboards:
         itm_btn_3 = self.set_btn('SETTINGS')
 
         self.markup.row(itm_btn_1)
-        self.markup.row(itm_btn_2,itm_btn_3)
+        self.markup.row(itm_btn_2, itm_btn_3)
         return self.markup
 
     def info_menu(self):
@@ -41,6 +41,7 @@ class Keyboards:
         return self.markup
 
     def settings_menu(self):
+        """Выводит инструкцию управления магазином"""
         self.markup = ReplyKeyboardMarkup(True, True)
         itm_btn_1 = self.set_btn('<<')
         self.markup.row(itm_btn_1)
