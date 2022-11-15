@@ -13,7 +13,19 @@ class HandlerAllText(Handler):
             message.chat.id,
             MESSAGES['trading_store'],
             parse_mode='HTML',
-            reply_markup=self.keyboards.info_menu()
+            reply_markup=self.keyboards.info_menu(),
+        )
+
+    def pressed_btn_category(self, message):
+        self.bot.send_message(
+            message.chat.id,
+            'Каталог категорий товаров',
+            reply_markup=self.keyboards.remove_menu(),
+        )
+        self.bot.send_message(
+            message.chat.id,
+            'Сделайте свой выбор',
+            reply_markup=self.keyboards.category_menu()
         )
 
     def pressed_btn_settings(self, message):
@@ -35,6 +47,10 @@ class HandlerAllText(Handler):
 
         @self.bot.message_handler()
         def handle(message):
+
+            # Основное меню
+            if message.text == config.KEYBOARD.get('CHOOSE GOODS'):
+                self.pressed_btn_category(message)
 
             if message.text == config.KEYBOARD.get('INFO'):
                 self.pressed_btn_info(message)
