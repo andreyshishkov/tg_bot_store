@@ -41,7 +41,7 @@ CATEGORY = {
     'ICE CREAM': 3
 }
 
-COMMANDS  = {
+COMMANDS = {
     'START': 'start',
     'HELP': 'help',
 }

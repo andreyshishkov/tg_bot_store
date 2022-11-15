@@ -43,6 +43,18 @@ class HandlerAllText(Handler):
             reply_markup=self.keyboards.start_menu()
         )
 
+    def pressed_btn_product(self, message, product):
+        self.bot.send_message(
+            message.chat.id,
+            'Категория' + config.KEYBOARD.get(product),
+            reply_markup=self.keyboards.set_select_category(config.CATEGORY.get(product))
+        )
+        self.bot.send_message(
+            message.chat.id,
+            'Ok',
+            reply_markup=self.keyboards.category_menu()
+        )
+
     def handle(self):
 
         @self.bot.message_handler()
