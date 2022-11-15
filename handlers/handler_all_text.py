@@ -60,3 +60,13 @@ class HandlerAllText(Handler):
 
             if message.text == config.KEYBOARD.get('<<'):
                 self.pressed_btn_back(message)
+
+            # Меню товаров
+            if message.text == config.KEYBOARD.get('SEMI PRODUCT'):
+                self.pressed_btn_product(message, 'SEMI PRODUCT')
+
+            if message.text == config.KEYBOARD.get('GROCERY'):
+                self.pressed_btn_product(message, 'GROCERY')
+
+            if message.text == config.KEYBOARD.get('ICE CREAM'):
+                self.pressed_btn_product(message, 'ICE CREAM')
