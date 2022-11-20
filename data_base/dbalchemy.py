@@ -113,5 +113,10 @@ class DBManager(metaclass=Singleton):
         result = self._session.query(Products.price).filter_by(id=row_num).one()
         return result.price
 
+    def count_rows_order(self):
+        result = self._session.query(Order).count()
+        self.close()
+        return result
+
     def close(self):
         self._session.close()

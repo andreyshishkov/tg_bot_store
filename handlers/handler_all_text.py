@@ -7,6 +7,7 @@ class HandlerAllText(Handler):
 
     def __init__(self, bot):
         super().__init__(bot)
+        self.step = None
 
     def pressed_btn_info(self, message):
         self.bot.send_message(
@@ -55,6 +56,32 @@ class HandlerAllText(Handler):
             reply_markup=self.keyboards.category_menu()
         )
 
+    def pressed_btn_order(self, message):
+        self.step = 0
+
+        count = self.BD.select_all_product_id()
+        quantity = self.BD.select_order_quantity(count[self.step])
+
+        self.send_message_order(count[self.step], quantity, message)
+
+    def send_message_order(self, product_id, quantity, message):
+        self.bot.send_message(
+            message.chat.id,
+            MESSAGES.get('order_number').format(self.step + 1),
+            parse_mode='HTML',
+        )
+        self.bot.send_message(
+            message.chat.id,
+            MESSAGES.get('order').format(
+                self.BD.select_single_product_name(product_id),
+                self.BD.select_single_product_title(product_id),
+                self.BD.select_single_product_price(product_id),
+                self.BD.select_single_product_quantity(product_id)
+            ),
+            parse_mode='HTML',
+            reply_markup=self.keyboards.orders_menu(self.step, quantity)
+        )
+
     def handle(self):
 
         @self.bot.message_handler()
@@ -72,6 +99,17 @@ class HandlerAllText(Handler):
 
             if message.text == config.KEYBOARD.get('<<'):
                 self.pressed_btn_back(message)
+
+            if message.text == config.KEYBOARD.get('ORDER'):
+                if self.BD.count_rows_order() > 0:
+                    self.pressed_btn_order(message)
+                else:
+                    self.bot.send_message(
+                        message.chat.id,
+                        MESSAGES['no_orders'],
+                        parse_mode='HTML',
+                        reply_markup=self.keyboards.category_menu()
+                    )
 
             # Меню товаров
             if message.text == config.KEYBOARD.get('SEMI_PRODUCT'):

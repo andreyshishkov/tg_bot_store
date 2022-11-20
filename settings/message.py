@@ -72,7 +72,19 @@ product_order = """
 
 order = """
 
-<i>Название
+<i>Название:</i> <b>{}</b>
+
+<i>Описание:</i> <b>{}</b>
+
+<i>Cтоимость:</i> <b>{} руб за 1 ед.</b>
+
+<i>Количество позиций:</i> <b>{} ед.</b> 
+"""
+
+order_number = """
+
+<b>Позиция в заказе № </b> <i>{}</i>
+
 """
 
 
@@ -83,4 +95,5 @@ MESSAGES = {
     'no_orders': no_orders,
     'product_order': product_order,
     'order': order,
+    'order_number': order_number,
 }
