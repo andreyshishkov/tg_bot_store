@@ -82,6 +82,21 @@ class HandlerAllText(Handler):
             reply_markup=self.keyboards.orders_menu(self.step, quantity)
         )
 
+    def pressed_btn_up(self, message):
+        count = self.BD.select_all_product_id()  # список всех товаров в заказе
+        quantity_order = self.BD.select_order_quantity(count[self.step])  # количество конкретной позиции в заказе
+        quantity_product = self.BD.select_single_product_quantity(count[self.step])  # кол-во продукта на складе
+
+        if quantity_product > 0:
+            quantity_order += 1
+            quantity_product -= 1
+
+            self.BD.update_order_value(count[self.step], 'quantity', quantity_order)
+            self.BD.update_product_value(count[self.step], 'quantity', quantity_product)
+
+        self.send_message_order(count[self.step], quantity_order, message)
+
+
     def handle(self):
 
         @self.bot.message_handler()
