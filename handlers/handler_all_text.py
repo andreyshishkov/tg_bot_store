@@ -76,7 +76,7 @@ class HandlerAllText(Handler):
                 self.BD.select_single_product_name(product_id),
                 self.BD.select_single_product_title(product_id),
                 self.BD.select_single_product_price(product_id),
-                self.BD.select_single_product_quantity(product_id)
+                self.BD.select_order_quantity(product_id)
             ),
             parse_mode='HTML',
             reply_markup=self.keyboards.orders_menu(self.step, quantity)
@@ -109,6 +109,10 @@ class HandlerAllText(Handler):
             self.BD.update_product_value(count[self.step], 'quantity', quantity_product)
 
         self.send_message_order(count[self.step], quantity_order, message)
+
+    def pressed_btn_x(self, message):
+        pass
+
 
     def handle(self):
 

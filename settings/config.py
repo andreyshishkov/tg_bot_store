@@ -29,8 +29,8 @@ KEYBOARD = {
     'X': emojize('❌'),
     'AMOUNT PRODUCT': COUNT,
     'AMOUNT ORDERS': COUNT,
-    'UP': emojize(' ▲ '),
-    'DOWN': emojize(' ▼ '),
+    'UP': emojize('▲'),
+    'DOWN': emojize('▼'),
     'APPLY': emojize('✅ Сделать заказ'),
     'COPY': emojize('©')
 }
