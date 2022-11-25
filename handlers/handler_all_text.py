@@ -96,6 +96,19 @@ class HandlerAllText(Handler):
 
         self.send_message_order(count[self.step], quantity_order, message)
 
+    def pressed_btn_down(self, message):
+        count = self.BD.select_all_product_id()
+        quantity_order = self.BD.select_order_quantity(count[self.step])
+        quantity_product = self.BD.select_single_product_quantity(count[self.step])
+
+        if quantity_order > 0:
+            quantity_order -= 1
+            quantity_product += 1
+
+            self.BD.update_order_value(count[self.step], 'quantity', quantity_order)
+            self.BD.update_product_value(count[self.step], 'quantity', quantity_product)
+
+        self.send_message_order(count[self.step], quantity_order, message)
 
     def handle(self):
 
