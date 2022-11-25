@@ -120,3 +120,20 @@ class HandlerAllText(Handler):
 
             if message.text == config.KEYBOARD.get('ICE_CREAM'):
                 self.pressed_btn_product(message, 'ICE_CREAM')
+
+            # Меню заказа
+            if message.text == config.KEYBOARD.get('UP'):
+                self.pressed_btn_up(message)
+
+            if message.text == config.KEYBOARD.get('DOWN'):
+                self.pressed_btn_down(message)
+
+            if message.text == config.KEYBOARD.get('X'):
+                self.pressed_btn_x(message)
+
+            if message.text == config.KEYBOARD.get('BACK_STEP'):
+                self.pressed_btn_back_step(message)
+
+            if message.text == config.KEYBOARD.get('NEXT_STEP'):
+                self.pressed_btn_next_step(message)
+
