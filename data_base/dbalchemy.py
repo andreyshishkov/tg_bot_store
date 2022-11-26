@@ -118,5 +118,10 @@ class DBManager(metaclass=Singleton):
         self.close()
         return result
 
+    def delete_order(self, product_id):
+        self._session.query(Order).filter_by(product_id=product_id).delete()
+        self._session.commit()
+        self.close()
+
     def close(self):
         self._session.close()

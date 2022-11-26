@@ -111,8 +111,38 @@ class HandlerAllText(Handler):
         self.send_message_order(count[self.step], quantity_order, message)
 
     def pressed_btn_x(self, message):
-        pass
+        count = self.BD.select_all_product_id()
+        if len(count) > 0:
+            quantity_order = self.BD.select_order_quantity(count[self.step])
 
+            quantity_product = self.BD.select_single_product_quantity(count[self.step])
+            quantity_product += quantity_order
+
+            self.BD.delete_order(count[self.step])
+            self.BD.update_product_value(count[self.step], 'quantity', quantity_product)
+            self.step -= 1
+
+        count = self.BD.select_all_product_id()
+        if len(count) > 0:
+            quantity_order = self.BD.select_order_quantity(count[self.step])
+            self.send_message_order(count[self.step], quantity_order, message)
+
+        else:
+            self.bot.send_message(
+                message.chat, id,
+                MESSAGES['no_orders'],
+                parse_mode='HTML',
+                reply_markup=self.keyboards.category_menu(),
+            )
+
+    def pressed_btn_back_step(self, message):
+        if self.step > 0:
+            self.step -= 1
+
+        count = self.BD.select_all_product_id()
+        quantity = self.BD.select_order_quantity(count[self.step])
+
+        self.send_message_order(count[self.step], quantity, message)
 
     def handle(self):
 

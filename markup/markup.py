@@ -102,5 +102,3 @@ class Keyboards:
             self.markup.add(self.set_inline_btn(itm))
 
         return self.markup
-
-
